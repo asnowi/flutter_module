@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_module/common/app/index.dart';
 import 'package:flutter_module/common/utils/index.dart';
 import 'package:lottie/lottie.dart';
 
@@ -23,7 +24,11 @@ class Global {
   static Future init() async{
     // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
-
+    // 工具初始
+    await StorageUtil().init();
+    // 第一次打开应用
+    hasStartup = StorageUtil().getBool(SaveInfoKey.HAS_HOME)?? false;
+    Logger.ggq('hasStartup--->$hasStartup');
     //  android 状态栏为透明的沉浸
     if (isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =
@@ -36,7 +41,7 @@ class Global {
           systemNavigationBarIconBrightness: Brightness.dark
       );
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-      Logger.ggq('global init');
+      Logger.ggq('global init---');
     }
 
     EasyLoading.instance

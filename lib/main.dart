@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_module/common/app/index.dart';
-import 'package:flutter_module/pages/index/IndexView.dart';
+import 'package:flutter_module/common/utils/screen.dart';
+import 'package:flutter_module/pages/home/home_view.dart';
+import 'package:flutter_module/pages/welcome/welcome_binding.dart';
+import 'package:flutter_module/pages/welcome/welcome_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812 - 44 - 34),
+      designSize: designSize(),
       builder: () => RefreshConfiguration(
         headerBuilder: () => WaterDropHeader(),
         // Configure the default header indicator. If you have the same header indicator for each page, you need to set this
@@ -66,17 +69,19 @@ class MyApp extends StatelessWidget {
             unknownRoute: AppPages.unknownRoute,
 
             // 启动页面
-            initialRoute: AppPages.INITIAL,
-            home: IndexView(),
-            builder: EasyLoading.init()
+            initialRoute: Global.hasStartup ? AppRoutes.home : AppRoutes.welcome,
+            home: Global.hasStartup? HomeView() : WelcomeView(),
+            initialBinding: Global.hasStartup? null : WelcomeBinding(),
+            builder: EasyLoading.init(),
             // 多语言
             // locale: TranslationService.locale,
             // fallbackLocale: TranslationService.fallbackLocale,
             // translations: TranslationService(),
 
             // 主题
-            // theme: appThemeData,
-            ),
+            // theme: ThemeProvider.appTheme(),
+            // darkTheme: ThemeProvider.appTheme(),
+           ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+
 import 'package:flutter_module/common/utils/index.dart';
 
 class StringUtils {
@@ -6,4 +7,6 @@ class StringUtils {
   static bool isEmpty(String? s) {
     return TextUtil.isEmpty(s);
   }
+
+
 }
