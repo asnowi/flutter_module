@@ -4,8 +4,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_module/common/app/index.dart';
 import 'package:flutter_module/common/utils/screen.dart';
 import 'package:flutter_module/pages/home/home_view.dart';
-import 'package:flutter_module/pages/welcome/welcome_binding.dart';
-import 'package:flutter_module/pages/welcome/welcome_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -68,10 +66,9 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.routes,
             unknownRoute: AppPages.unknownRoute,
 
-            // 启动页面
-            initialRoute: Global.hasStartup ? AppRoutes.home : AppRoutes.welcome,
-            home: Global.hasStartup? HomeView() : WelcomeView(),
-            initialBinding: Global.hasStartup? null : WelcomeBinding(),
+            // 首页
+            initialRoute: AppRoutes.home,
+            home: HomeView(),
             builder: EasyLoading.init(),
             // 多语言
             // locale: TranslationService.locale,

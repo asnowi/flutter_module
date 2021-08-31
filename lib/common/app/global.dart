@@ -17,18 +17,12 @@ class Global {
   /// 是否 android
   static bool isAndroid = Platform.isAndroid;
 
-  /// 是否第一次打开
-  static bool hasStartup = false;
-
   /// init
   static Future init() async{
     // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
     // 工具初始
     await StorageUtil().init();
-    // 第一次打开应用
-    hasStartup = StorageUtil().getBool(SaveInfoKey.HAS_HOME)?? false;
-    Logger.ggq('hasStartup--->$hasStartup');
     //  android 状态栏为透明的沉浸
     if (isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =

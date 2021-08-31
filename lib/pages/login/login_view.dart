@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 class LoginView extends GetView<LoginController>{
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('login'),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,// 解决键盘顶起页面
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+
+      ),
     );
   }
 
